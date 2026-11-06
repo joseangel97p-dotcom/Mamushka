@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff9fa">
+  <meta name="description" content="Descubrí indumentaria, calzado y accesorios en Mamushka. Consultá disponibilidad y reservá por WhatsApp.">
+  <title>Mamushka | Indumentaria, calzado y accesorios</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script defer src="store.js"></script>
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="#inicio">mamushka<span>.</span></a>
+    <nav class="desktop-nav">
+      <a href="#inicio">Inicio</a><a href="#catalogo">Catálogo</a><a href="#nosotros">Nosotros</a>
+    </nav>
+    <a class="header-contact" id="headerWhatsapp" href="#" target="_blank" rel="noopener">Hablemos por WhatsApp <span>↗</span></a>
+    <button class="mobile-menu" id="mobileMenu" aria-label="Abrir menú">☰</button>
+  </header>
+
+  <main>
+    <section class="hero" id="inicio">
+      <div class="hero-copy">
+        <p class="eyebrow">MAMUSHKA · RÍO TURBIO</p>
+        <h1>Encontrá eso<br>que te encanta.</h1>
+        <p class="hero-description">Indumentaria, calzado y accesorios para acompañarte todos los días. Explorá la colección y consultanos por WhatsApp.</p>
+        <a class="primary-link" href="#catalogo">Descubrir la colección <span>→</span></a>
+        <div class="hero-note"><span class="note-dot"></span> Atención personalizada · Consultas por WhatsApp</div>
+      </div>
+      <div class="hero-visual">
+        <img src="https://images.unsplash.com/photo-1483985988355-763728e1935b?auto=format&fit=crop&w=1200&q=85" alt="Inspiración de moda femenina">
+        <div class="hero-sticker"><span>Tu estilo</span><strong>Tu manera.</strong></div>
+      </div>
+    </section>
+
+    <section class="catalog-section" id="catalogo">
+      <div class="catalog-heading">
+        <div><p class="eyebrow">DESCUBRÍ MAMUSHKA</p><h2>La colección</h2><p class="muted">Elegí tus favoritos y consultá su disponibilidad.</p></div>
+        <span class="product-count" id="productCount">Cargando...</span>
+      </div>
+      <div class="catalog-tools">
+        <label class="search-box"><span>⌕</span><input id="searchInput" type="search" placeholder="Buscar prendas, zapatos..." aria-label="Buscar productos"></label>
+        <div class="category-pills" id="categoryFilters">
+          <button class="filter-pill active" data-category="Todos">Todo</button>
+          <button class="filter-pill" data-category="Indumentaria">Indumentaria</button>
+          <button class="filter-pill" data-category="Calzado">Calzado</button>
+          <button class="filter-pill" data-category="Accesorios">Accesorios</button>
+        </div>
+      </div>
+      <div class="products-grid" id="productsGrid">
+        <div class="loading-state">Estamos preparando la colección...</div>
+      </div>
+      <p class="empty-state hidden" id="emptyState">No encontramos productos con esa búsqueda.</p>
+    </section>
+
+    <section class="how-section" id="nosotros">
+      <div class="how-intro"><p class="eyebrow">COMPRAR EN MAMUSHKA</p><h2>Simple, cercano<br>y personalizado.</h2></div>
+      <div class="how-step"><span>01</span><h3>Elegí tu favorito</h3><p>Explorá las fotos, los detalles, talles y colores.</p></div>
+      <div class="how-step"><span>02</span><h3>Consultanos</h3><p>Te llevamos a WhatsApp con el producto seleccionado.</p></div>
+      <div class="how-step"><span>03</span><h3>Coordinamos</h3><p>Confirmamos disponibilidad y arreglamos el pago y la entrega.</p></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <a class="brand" href="#inicio">mamushka<span>.</span></a>
+    <p>Moda, calzado y accesorios.</p>
+    <a id="footerWhatsapp" href="#" target="_blank" rel="noopener">Escribinos por WhatsApp ↗</a>
+    <small>© <span id="year"></span> Mamushka. Todos los derechos reservados.</small>
+  </footer>
+
+  <div class="product-modal hidden" id="productModal" aria-hidden="true">
+    <div class="modal-backdrop" data-close-modal></div>
+    <section class="modal-panel" role="dialog" aria-modal="true" aria-labelledby="modalName">
+      <button class="modal-close" type="button" data-close-modal aria-label="Cerrar">×</button>
+      <div class="modal-gallery">
+        <img id="modalMainImage" src="" alt="">
+        <div class="modal-thumbnails" id="modalThumbnails"></div>
+      </div>
+      <div class="modal-details">
+        <p class="eyebrow" id="modalCategory"></p>
+        <h2 id="modalName"></h2>
+        <p class="modal-price" id="modalPrice"></p>
+        <p class="modal-description" id="modalDescription"></p>
+        <div id="modalSizesWrap" class="option-wrap"><strong>Talle</strong><div id="modalSizes" class="option-list"></div></div>
+        <div id="modalColorsWrap" class="option-wrap"><strong>Color</strong><div id="modalColors" class="option-list"></div></div>
+        <p class="availability-note" id="availabilityNote">La disponibilidad se confirma por WhatsApp.</p>
+        <button class="whatsapp-cta" id="modalWhatsapp" type="button">Consultar / reservar por WhatsApp <span>↗</span></button>
+      </div>
+    </section>
+  </div>
+
+  <div class="toast" id="toast" role="status"></div>
+</body>
+</html>

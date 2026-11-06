@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff9fa">
+  <title>Administración | Mamushka</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase-config.js"></script>
+  <script defer src="admin.js"></script>
+</head>
+<body class="admin-body">
+  <header class="admin-header"><a class="brand" href="index.html">mamushka<span>.</span></a><span>Administración</span><button id="logoutButton" class="text-button hidden">Cerrar sesión</button></header>
+  <main class="admin-main">
+    <section id="loginPanel" class="login-card">
+      <p class="eyebrow">PANEL PRIVADO</p><h1>Hola de nuevo.</h1><p class="muted">Ingresá para administrar las publicaciones de Mamushka.</p>
+      <form id="loginForm" class="stack-form">
+        <label>Email<input type="email" id="loginEmail" autocomplete="username" required placeholder="tu@email.com"></label>
+        <label>Contraseña<input type="password" id="loginPassword" autocomplete="current-password" required placeholder="Tu contraseña"></label>
+        <button class="admin-primary" type="submit">Ingresar</button>
+        <p class="form-message" id="loginMessage"></p>
+      </form>
+    </section>
+
+    <section id="dashboard" class="hidden">
+      <div class="admin-welcome"><div><p class="eyebrow">TU TIENDA, A TU MANERA</p><h1>Publicaciones</h1><p class="muted">Cargá una novedad como si fuera una publicación de Instagram.</p></div><a href="index.html" target="_blank" class="preview-link">Ver tienda ↗</a></div>
+      <div class="admin-layout">
+        <section class="editor-card">
+          <div class="editor-title"><div><span class="step-label">NUEVA PUBLICACIÓN</span><h2 id="formTitle">¿Qué vamos a publicar?</h2></div><span class="editor-flower">✿</span></div>
+          <form id="productForm" class="stack-form">
+            <input type="hidden" id="productId">
+            <label class="upload-zone" for="imageFiles">
+              <input id="imageFiles" type="file" accept="image/*" multiple>
+              <span class="upload-icon">＋</span><strong>Agregar fotos</strong><small>Elegí hasta 5 fotos desde tu celular. Tocá para abrir la galería.</small>
+            </label>
+            <div class="image-preview-grid" id="imagePreviewGrid"></div>
+            <label>Nombre del producto<input id="productName" required maxlength="90" placeholder="Ej. Campera de jean oversize"></label>
+            <div class="form-two">
+              <label>Precio (ARS)<input id="productPrice" type="number" min="0" step="1" required placeholder="Ej. 85000" inputmode="numeric"></label>
+              <label>Categoría<select id="productCategory" required><option value="Indumentaria">Indumentaria</option><option value="Calzado">Calzado</option><option value="Accesorios">Accesorios</option></select></label>
+            </div>
+            <label>Descripción<textarea id="productDescription" rows="3" maxlength="500" placeholder="Contá brevemente cómo es el producto..."></textarea></label>
+            <div class="variant-card">
+              <div><strong>Opciones del producto</strong><small>Si no corresponde, podés dejarlo vacío.</small></div>
+              <label>Talles<input id="productSizes" placeholder="Ej. S, M, L, XL o 36, 37, 38"></label>
+              <label>Colores<input id="productColors" placeholder="Ej. Negro, Beige, Chocolate"></label>
+            </div>
+            <div class="form-two">
+              <label>Estado<select id="productStatus"><option value="published">Publicado</option><option value="sold_out">Sin stock (visible)</option><option value="draft">Borrador</option><option value="hidden">Oculto</option></select></label>
+              <label>Etiqueta<select id="productTag"><option value="">Sin etiqueta</option><option value="NUEVO">Nuevo</option><option value="DESTACADO">Destacado</option><option value="OFERTA">Oferta</option></select></label>
+            </div>
+            <div class="editor-actions"><button class="admin-primary" id="saveButton" type="submit">Publicar producto</button><button class="admin-secondary hidden" id="cancelEdit" type="button">Cancelar edición</button></div>
+            <p class="form-message" id="saveMessage"></p>
+          </form>
+        </section>
+        <section class="inventory-card">
+          <div class="inventory-heading"><div><span class="step-label">TU CATÁLOGO</span><h2>Productos cargados</h2></div><span id="adminProductCount" class="count-bubble">0</span></div>
+          <div id="adminProductList" class="admin-product-list"><p class="muted">Cargando productos...</p></div>
+        </section>
+      </div>
+    </section>
+  </main>
+  <div class="toast" id="adminToast" role="status"></div>
+</body>
+</html>
